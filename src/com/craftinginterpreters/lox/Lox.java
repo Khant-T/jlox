@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Lox
 {
+    static boolean hadError = false;
+
     public static void main(String args[]) throws IOException
     {
         if (args.length > 1)
@@ -40,11 +42,12 @@ public class Lox
 
         for (;;)
         {
-            System.out.println("> ");
+            System.out.print("> ");
             String line = reader.readLine();
             if (line == null)
                 break;
             run(line);
+            hadError = false;
         }
     }
 
@@ -56,5 +59,20 @@ public class Lox
         // For now, just print the tokens.
         for (Token token : tokens)
             System.out.println(token);
+
+        // Indicate an error in the exit code.
+        if (hadError)
+            System.exit(65);
+    }
+
+    static void error(int line, String message)
+    {
+        report(line, "", message);
+    }
+
+    private static void report(int line, String where, String message)
+    {
+        System.err.println("[line " + line + "] Error" + where + ": " + message);
+        hadError = true;
     }
 }
