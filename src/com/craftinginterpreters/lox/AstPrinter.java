@@ -36,15 +36,14 @@ public class AstPrinter implements Expr.Visitor<String>
     {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("(");
+        builder.append("(").append(name);
         for (Expr expr : exprs)
         {
-            builder.append(expr.accept(this));
             builder.append(" ");
+            builder.append(expr.accept(this));
         }
-
-        builder.append(name);
         builder.append(")");
+
         return builder.toString();
     }
 }
