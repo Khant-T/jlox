@@ -58,5 +58,19 @@ public class Parser
         if (!isAtEnd()) ++current;
         return previous();
     }
-    
+
+    private boolean isAtEnd()
+    {
+        return peek().type == EOF;
+    }
+
+    private Token peek()
+    {
+        return tokens.get(current);
+    }
+
+    private Token previous()
+    {
+        return tokens.get(current - 1);
+    }
 }
