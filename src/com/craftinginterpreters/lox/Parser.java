@@ -105,7 +105,7 @@ public class Parser
             return new Expr.Grouping(expr);
         }
 
-        return null;
+        throw error(peek(), "Expect expression.");
     }
 
     private boolean match(TokenType... types)
