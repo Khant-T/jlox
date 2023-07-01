@@ -161,4 +161,29 @@ public class Parser
         Lox.error(token, message);
         return new ParseError();
     }
+
+    private void synchronize()
+            // We synchronize on statement boundaries
+            // When it works well, we have discarded tokens that would have likely caused cascaded errors
+    {
+        advance();
+        while (!isAtEnd())
+        {
+            if (previous().type == SEMICOLON) return;
+
+            switch (peek().type)
+            {
+                case CLASS:
+                case FUN:
+                case VAR:
+                case FOR:
+                case IF:
+                case WHILE:
+                case PRINT:
+                case RETURN:
+                    return;
+            }
+        }
+        advance();
+    }
 }
