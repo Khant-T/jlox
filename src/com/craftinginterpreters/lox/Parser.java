@@ -47,6 +47,45 @@ public class Parser
         return expr;
     }
 
+    private Expr term()
+    {
+        Expr expr = factor();
+
+        while (match(PLUS, MINUS))
+        {
+            Token operator = previous();
+            Expr  right    = factor();
+            expr = new Expr.Binary(expr, operator, right);
+        }
+
+        return expr;
+    }
+
+    private Expr factor()
+    {
+        Expr expr = unary();
+
+        while (match(STAR, SLASH))
+        {
+            Token operator = previous();
+            Expr  right    = unary();
+            expr = new Expr.Binary(expr, operator, right);
+        }
+
+        return expr;
+    }
+
+    private Expr unary()
+    {
+        if (match(BANG, MINUS))
+        {
+            Token operator = previous();
+            Expr right = unary();
+            return new Expr.Unary(operator, right);
+        }
+        return primary();
+    }
+
     private boolean match(TokenType... types)
     {
         for (TokenType type : types)
