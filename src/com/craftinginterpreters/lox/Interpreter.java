@@ -2,6 +2,18 @@ package com.craftinginterpreters.lox;
 
 public class Interpreter implements Expr.Visitor<Object>
 {
+    void interpret(Expr expression)
+    {
+        try
+        {
+            Object value = evaluate(expression);
+            System.out.println(stringify(value));
+        }
+        catch (RuntimeError error)
+        {
+            Lox.runtimeError(error);
+        }
+    }
     private Object evaluate(Expr expr)
     {
         return expr.accept(this);
