@@ -49,8 +49,7 @@ abstract class Expr
     {
         Literal(Object value)
         {
-            if (value instanceof Token) this.value = ((Token) value).literal;
-            else this.value = value;
+            this.value = value;
         }
 
         @Override
