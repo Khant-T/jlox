@@ -29,18 +29,6 @@ public class Lox
         {
             runPrompt();
         }
-
-        // AstPrinter Example:
-        /*Expr expression = new Expr.Binary(
-                new Expr.Unary(
-                        new Token(TokenType.MINUS, "-", null, 1),
-                        new Expr.Literal(123)
-                ),
-                new Token(TokenType.STAR, "*", null, 1),
-                new Expr.Grouping(new Expr.Literal(45.67))
-        );
-
-        System.out.println(new AstPrinter().print(expression));*/
     }
 
     private static void runFile(String path) throws IOException
@@ -81,11 +69,11 @@ public class Lox
         if (hadError) return;
 
         // DEBUG. Syntax tree printer
-        AstPrinter astPrinter = new AstPrinter();
+        /*AstPrinter astPrinter = new AstPrinter();
         for (Stmt statement : statements)
         {
             System.out.println(astPrinter.print(statement));
-        }
+        }*/
 
         interpreter.interpret(statements);
     }
