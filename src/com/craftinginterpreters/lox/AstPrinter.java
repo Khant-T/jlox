@@ -15,12 +15,14 @@ public class AstPrinter implements Expr.Visitor<String>, Stmt.Visitor<String>
     @Override
     public String visitPrintStmt(Stmt.Print stmt)
     {
-        return parenthesize("print");
+        return "(print)";
     }
 
     @Override
     public String visitExpressionStmt(Stmt.Expression stmt)
     {
+        if (stmt.expression instanceof Expr.Assign)
+            return visitAssignExpr((Expr.Assign)stmt.expression);
         if (stmt.expression instanceof Expr.Binary)
             return visitBinaryExpr((Expr.Binary)stmt.expression);
         if (stmt.expression instanceof Expr.Unary)
@@ -30,6 +32,7 @@ public class AstPrinter implements Expr.Visitor<String>, Stmt.Visitor<String>
         if (stmt.expression instanceof Expr.Literal)
             return visitLiteralExpr((Expr.Literal)stmt.expression);
 
+
         // Unreachable.
         return null;
     }
@@ -38,6 +41,12 @@ public class AstPrinter implements Expr.Visitor<String>, Stmt.Visitor<String>
     public String visitVarStmt(Stmt.Var stmt)
     {
         return "(define " + stmt.name.lexeme + ")";
+    }
+
+    @Override
+    public String visitAssignExpr(Expr.Assign expr)
+    {
+        return parenthesize("= " + expr.name.lexeme, expr.value);
     }
 
     @Override
