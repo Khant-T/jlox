@@ -38,6 +38,12 @@ public class AstPrinter implements Expr.Visitor<String>, Stmt.Visitor<String>
     }
 
     @Override
+    public String visitBlockStmt(Stmt.Block stmt)
+    {
+        return "(block)";
+    }
+
+    @Override
     public String visitVarStmt(Stmt.Var stmt)
     {
         return "(define " + stmt.name.lexeme + ")";
