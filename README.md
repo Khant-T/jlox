@@ -1,14 +1,4 @@
 # jlox
-`jlox` is a tree-walk interpreter from [Crafting Interpreters](https://craftinginterpreters.com) by Robert Nystrom.
-
-## Grammar
-### Expression
-| production | rule(s)                                                                |
-|------------|------------------------------------------------------------------------|
-| expression | literal \| unary \| binary \| grouping                                 |
-| literal    | `NUMBER` \| `STRING` \| "true" \| "false" \| "nil"                     |
-| grouping   | "(" expression ")"                                                     |
-| unary      | ( "-" \| "!" ) expression                                              |
-| binary     | expression operator expression                                         |
-| operator   | "==" \| "!=" \| "<" \| "<=" \| ">" \| ">=" \| "+" \| "-" \| "*" \| "/" |
+`jlox` is a tree-walk interpreter for the `Lox` programming language from [Crafting Interpreters](https://craftinginterpreters.com) by Robert Nystrom.<br>
+Click [here](https://craftinginterpreters.com/appendix-i.html) to see `Lox` grammar.
 
