@@ -204,7 +204,8 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>
     private boolean isTruthy(Object object)
     {
         if (object == null) return false;
-        if (object instanceof Object) return (Boolean) object;
+        // Not working for wrappers (Double, String)
+        // if (object instanceof Object) return (Boolean) object;
         return true;
     }
 
