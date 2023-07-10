@@ -66,7 +66,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>
     {
         if (isTruthy(evaluate(stmt.condition)))
             execute(stmt.thenBranch);
-        else if (!isTruthy(evaluate(stmt.condition)))
+        else if (stmt.elseBranch != null)
             execute(stmt.elseBranch);
         return null;
     }
@@ -215,7 +215,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Void>
     {
         if (object == null) return false;
         // Not working for wrappers (Double, String)
-        // if (object instanceof Object) return (Boolean) object;
+        if (object instanceof Object) return (Boolean) object;
         return true;
     }
 
