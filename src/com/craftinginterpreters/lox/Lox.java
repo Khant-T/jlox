@@ -68,12 +68,8 @@ public class Lox
         // Stop if there was a syntax error.
         if (hadError) return;
 
-        // DEBUG. Syntax tree printer
-        /*AstPrinter astPrinter = new AstPrinter();
-        for (Stmt statement : statements)
-        {
-            System.out.println(astPrinter.print(statement));
-        }*/
+        Resolver resolver = new Resolver(interpreter);
+        resolver.resolve(statements);
 
         interpreter.interpret(statements);
     }
